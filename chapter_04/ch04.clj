@@ -91,4 +91,14 @@
                  (map vampire-related-details social-security-numbers))))
 (time (vampire-related-details 0))
 (time (def mapped-details (map vampire-related-details (range 0 1000000))))
-(time (def mapped-details (doall (map vampire-related-details (range 0 1000000)))))
+;;(time (def mapped-details (doall (map vampire-related-details (range 0 1000000)))))
+(time (first mapped-details))
+(time (identify-vampire (range 0 1000000)))
+
+(concat (take 8 (repeat "na")) ["Batman!"])
+(take 3 (repeatedly (fn [] (rand-int 10))))
+
+(defn even-numbers
+  ([] (even-numbers 0))
+  ([n] (cons n (lazy-seq (even-numbers (+ n 2))))))
+(take 10 (even-numbers))
