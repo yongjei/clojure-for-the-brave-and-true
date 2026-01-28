@@ -102,3 +102,31 @@
   ([] (even-numbers 0))
   ([n] (cons n (lazy-seq (even-numbers (+ n 2))))))
 (take 10 (even-numbers))
+
+(empty? [])
+(empty? ["no!"])
+
+(map identity {:sunlight-reaction "Glitter!"})
+(into {} (map identity {:sunlight-reaction "Glitter!"}))
+
+(conj [0] [1])
+(into [0] [1])
+(conj [0] 1)
+(conj [0] 1 2 3 4)
+
+(defn my-conj
+  [target & additions]
+  (into target additions))
+(my-conj [0] 1 2 3)
+
+(max [0 1 2])
+(apply max [0 1 2])
+
+(defn my-into
+  [target additions]
+  (apply conj target additions))
+(my-into [0] [1 2 3])
+
+(def add10 (partial + 10))
+(add10 3)
+
