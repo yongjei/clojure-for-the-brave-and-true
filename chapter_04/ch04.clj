@@ -1,3 +1,4 @@
+
 (defn titleize
   [topic]
   (str topic " for the Brave and True"))
@@ -130,3 +131,29 @@
 (def add10 (partial + 10))
 (add10 3)
 
+(defn my-partial
+  [partialized-fn & args]
+  (fn [& more-args]
+    (apply partialized-fn (into args more-args))))
+
+(def add20 (my-partial + 20))
+(add20 3)
+
+(defn lousy-logger
+  [log-level message]
+  (condp = log-level
+    :warn (clojure.string/lower-case message)
+    :emergency (clojure.string/upper-case message)))
+(def warn (partial lousy-logger :warn))
+(warn "RED light ahead")
+
+(defn identify-humans
+  [social-security-numbers]
+  (filter #(not (vampire? %))
+          (map vampire-related-details social-security-numbers)))
+
+(def not-vampire? (complement vampire?))
+(defn indentify-humans
+  [social-security-numbers]
+  (filter not-vampire?
+          (map vampire-related-details social-security-numbers)))
